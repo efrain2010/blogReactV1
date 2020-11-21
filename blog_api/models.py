@@ -4,17 +4,16 @@ from django.contrib.auth.models import User
 
 class Post(models.Model):
     POSTS_STATUS = [
-        'Public',
-        'Private',
-        'Draft',
+        (1, 'Public'),
+        (2, 'Private'),
+        (3, 'Draft'),
     ]
 
-    id = models.AutoField()
     parentId = models.ForeignKey("self", on_delete=models.CASCADE)
     title = models.CharField(max_length=120)
     metaTitle = models.CharField(max_length=120)
     content = models.TextField()
-    featuredImage = models.ImageField(upload_to='/uploads')
+    featuredImage = models.ImageField(upload_to='uploads/')
     slug = models.SlugField()
     status = models.CharField(
         max_length=12,
@@ -31,7 +30,6 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
-    id = models.AutoField()
     parentId = models.ForeignKey("self", on_delete=models.CASCADE)
     title = models.CharField(max_length=120)
     content = models.TextField()
@@ -42,7 +40,6 @@ class Comment(models.Model):
 
 
 class Meta(models.Model):
-    id = models.AutoField()
     key = models.CharField(max_length=120)
     content = models.TextField()
     post = models.OneToOneField(
@@ -52,7 +49,6 @@ class Meta(models.Model):
 
 
 class Category(models.Model):
-    id = models.AutoField()
     title = models.CharField(max_length=120)
     metaTitle = models.CharField(max_length=120)
     slug = models.SlugField()
@@ -63,7 +59,6 @@ class Category(models.Model):
 
 
 class Tag(models.Model):
-    id = models.AutoField()
     title = models.CharField(max_length=120)
     metaTitle = models.CharField(max_length=120)
     slug = models.SlugField()
