@@ -8,7 +8,7 @@ from blog_api.models import Post
 def get_posts(request):
     posts = Post.objects.all()
     posts_dict = [post.serialize() for post in posts]
-    return Response({"posts": posts_dict}, status=200)
+    return Response(posts_dict, status=200)
 
 
 @api_view(['POST'])

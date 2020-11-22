@@ -10,7 +10,7 @@ import Slide from "@material-ui/core/Slide";
 import Links from "../Links";
 
 import useStyles from "./styles";
-import logo from "../../../assets/images/logo.png";
+import logo from "../../../Assets/Images/logo.png";
 
 function HideOnScroll(props) {
   const { children, window } = props;

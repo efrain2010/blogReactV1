@@ -11,7 +11,7 @@ import InstagramIcon from "@material-ui/icons/Instagram";
 
 import useStyles from "./styles";
 
-import logo from "../../../assets/images/logo.png";
+import logo from "../../../Assets/Images/logo.png";
 
 const Footer = () => {
   const classes = useStyles();
