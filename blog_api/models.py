@@ -16,6 +16,7 @@ class Post(models.Model):
     metaTitle = models.CharField(max_length=120)
     content = models.TextField()
     featuredImage = models.ImageField(upload_to='uploads/%Y/%m/%d', blank=True, null=True)
+    featured = models.BooleanField(default=False)
     slug = models.SlugField()
     status = models.CharField(
         max_length=12,

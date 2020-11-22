@@ -65,16 +65,14 @@ const BlogComponent = (props) => {
   };
 
   return (
-    <section className={classes.root}>
-      <Container maxWidth="lg">
-        <Grid container spacing={2}>
-          <Grid item xs>
-            <h2>Blog</h2>
-          </Grid>
-          <EntriesTemplate entries={props.entries} />
+    <Container maxWidth="lg">
+      <Grid className={classes.root} component="section" container spacing={2}>
+        <Grid item xs>
+          <h2>Blog</h2>
         </Grid>
-      </Container>
-    </section>
+        <EntriesTemplate entries={props.entries} />
+      </Grid>
+    </Container>
   );
 };
 

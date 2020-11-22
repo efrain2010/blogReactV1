@@ -16,8 +16,16 @@ const useStyles = makeStyles({
       color: "#EC2B3D",
       textDecoration: "none",
     },
+    img: {
+      width: "100%",
+    },
     main: {
       paddingTop: 55,
+    },
+    ".background-image": {
+      backgroundRepeat: "no-repeat",
+      backgroundSize: "cover",
+      backgroundPosition: "center",
     },
   },
 });
