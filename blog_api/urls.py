@@ -1,9 +1,9 @@
 from django.contrib import admin
 from django.urls import path
-from .views import get_posts
-from .views import get_authors
+from blog_api.controllers.post_controller import get_posts
+from blog_api.controllers.post_controller import create_post
 
 urlpatterns = [
-    path('get_posts/', get_posts),
-    path('get_authors/', get_authors),
+    path('posts/', get_posts),
+    path('post/create/', create_post),
 ]

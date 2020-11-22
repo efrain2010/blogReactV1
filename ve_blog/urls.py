@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
-from .views import get_init_view
+from ve_blog.views import get_init_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
