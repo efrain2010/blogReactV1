@@ -7,6 +7,7 @@ django.setup()
 from django.contrib.auth.models import User
 from django.utils import timezone
 from blog_api.models import Post
+from django.contrib.auth.hashers import make_password
 
 
 def populate():
@@ -51,12 +52,12 @@ def add_user():
       user_model = User.objects.filter(username="efra")[0]
     else:
       user_model = User(
-          username= "efra",
-          email= "efrain.villanueva3@gmail.com",
-          password= "demodemo",
-          first_name= "Efrain",
-          last_name= "Villanueva")
-      user_model.save()
+            username = "efra",
+            email = "efrain.villanueva3@gmail.com",
+            password = make_password("demodemo"),
+            first_name = "Efrain",
+            last_name = "Villanueva")
+    user_model.save()
     return user_model
 
 

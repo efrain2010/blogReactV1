@@ -3,18 +3,20 @@ from django.conf import settings
 
 User = settings.AUTH_USER_MODEL
 
+
 class Category(models.Model):
     title = models.CharField(max_length=120)
     metaTitle = models.CharField(max_length=120)
-    slug = models.SlugField()
+    slug = models.SlugField(unique=True)
 
     def serialize(self):
         return {
+            "if": self.id,
             "title": self.title,
             "metaTitle": self.metaTitle,
             "slug": self.slug,
-            "post": self.post # Check if this is valid for the relation to the posts
         }
+
 
 class Post(models.Model):
     POSTS_STATUS = [
@@ -29,7 +31,7 @@ class Post(models.Model):
     content = models.TextField()
     featuredImage = models.ImageField(upload_to='uploads/%Y/%m/%d', blank=True, null=True)
     featured = models.BooleanField(default=False)
-    slug = models.SlugField()
+    slug = models.SlugField(unique=True)
     status = models.CharField(
         max_length=12,
         choices=POSTS_STATUS,
@@ -39,6 +41,11 @@ class Post(models.Model):
     updatedAt = models.DateTimeField()
     publishedAt = models.DateTimeField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    category = models.ForeignKey(
+        Category,
+        null=True,
+        on_delete=models.SET_NULL
+    )
 
     def serialize(self):
         return {
@@ -47,18 +54,15 @@ class Post(models.Model):
             "title": self.title,
             "metaTitle": self.metaTitle,
             "content": self.content,
+            "featured": self.featured,
             "slug": self.slug,
             "status": self.status,
             "createdAt": self.createdAt,
             "updatedAt": self.updatedAt,
             "publishedAt": self.publishedAt,
-            "user": self.user
+            "user": self.user,
+            "category": self.category
         }
-
-    @property
-    def featuredImageUrl(self):
-        if self.featuredImage and hasattr(self.featuredImage, 'url'):
-            return self.featuredImage.url
 
 
 class Comment(models.Model):
