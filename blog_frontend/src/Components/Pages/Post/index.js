@@ -10,8 +10,10 @@ import useStyles from "./styles";
 import hero from "../../../Assets/Images/code-background.jpg";
 import efra from "../../../Assets/Images/efra.jpg";
 
-const PostTemplate = () => {
+const PostTemplate = (props) => {
   const classes = useStyles();
+
+  const postDetail = props.postDetail;
 
   return (
     <article>
@@ -23,7 +25,7 @@ const PostTemplate = () => {
       >
         <Grid className="content" container>
           <Grid item xs>
-            <Typography variant="h1">A sushi salad for foodies</Typography>
+            <Typography variant="h1">{postDetail.title}</Typography>
             <div className="author-container">
               <Typography variant="h3">Efrain Villanueva</Typography>
               <img src={efra} alt="post feature" />
@@ -33,7 +35,7 @@ const PostTemplate = () => {
                 <a href="/category/food">Food</a>
               </p>
               <p className="date">
-                <a href="/date/2019/04/16">16 Apr 2019</a>
+                <a href="/date/2019/04/16">{postDetail.published}</a>
               </p>
               <div className="tags">
                 <p>

@@ -23,4 +23,12 @@ const create_post = (params) => {
   });
 };
 
-export { get_posts, create_post };
+const get_post = (slug) => {
+  return axios({
+    method: "GET",
+    url: `${config.url.API_URL + section}get/${slug}`,
+    headers: headers,
+  });
+};
+
+export { get_posts, create_post, get_post };

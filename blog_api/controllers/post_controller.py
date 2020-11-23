@@ -21,3 +21,9 @@ def create_post(request):
             obj = serializer.save(user=request.user)
             return Response({"Chambea": "Yes"}, status=200)
     return Response({"Chambea": "No"}, status=400)
+
+
+@api_view(['GET'])
+def get_post(request, slug):
+    post = Post.objects.get(slug=slug).serialize()
+    return Response(post, status=200)

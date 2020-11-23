@@ -2,8 +2,12 @@ from django.contrib import admin
 from django.urls import path
 from blog_api.controllers.post_controller import get_posts
 from blog_api.controllers.post_controller import create_post
+from blog_api.controllers.post_controller import get_post
+
+section_name = "posts/"
 
 urlpatterns = [
-    path('posts/', get_posts),
-    path('post/create/', create_post),
+    path(section_name, get_posts),
+    path(section_name + 'create/', create_post),
+    path(section_name + 'get/<slug:slug>/', get_post),
 ]
