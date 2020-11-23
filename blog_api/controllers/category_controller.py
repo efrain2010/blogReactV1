@@ -1,12 +1,12 @@
-from blog_api.serializers.post_serializer import PostSerializer
+from blog_api.serializers.category_serializer import CategorySerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from blog_api.models import Post
+from blog_api.models import Category
 from django.forms.models import model_to_dict
 
 
 @api_view(['GET'])
-def get_posts(request):
+def get_categories(request):
     posts = Post.objects.all()
     posts_dict = [post.serialize() for post in posts]
     for post, post_dict in zip(posts, posts_dict):
@@ -21,8 +21,8 @@ def get_posts(request):
 
 
 @api_view(['POST'])
-def create_post(request):
-    serializer = PostSerializer(data=request.data)
+def create_category(request):
+    serializer = CategorySerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
         if request.user.is_authenticated is False:
             return Response("The User is not Authenticated", status=401)
@@ -33,7 +33,7 @@ def create_post(request):
 
 
 @api_view(['GET'])
-def get_post(request, slug):
+def get_category(request, slug):
     try:
         post_model = Post.objects.get(slug=slug)
         post_dict = post_model.serialize()
@@ -50,7 +50,7 @@ def get_post(request, slug):
 
 
 @api_view(['DELETE', 'POST'])
-def delete_post(request, post_id):
+def delete_category(request, post_id):
     try:
         Post.objects.get(id=post_id).delete()
     except BaseException:

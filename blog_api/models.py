@@ -3,6 +3,18 @@ from django.conf import settings
 
 User = settings.AUTH_USER_MODEL
 
+class Category(models.Model):
+    title = models.CharField(max_length=120)
+    metaTitle = models.CharField(max_length=120)
+    slug = models.SlugField()
+
+    def serialize(self):
+        return {
+            "title": self.title,
+            "metaTitle": self.metaTitle,
+            "slug": self.slug,
+            "post": self.post # Check if this is valid for the relation to the posts
+        }
 
 class Post(models.Model):
     POSTS_STATUS = [
@@ -39,7 +51,8 @@ class Post(models.Model):
             "status": self.status,
             "createdAt": self.createdAt,
             "updatedAt": self.updatedAt,
-            "publishedAt": self.publishedAt
+            "publishedAt": self.publishedAt,
+            "user": self.user
         }
 
     @property
@@ -62,16 +75,6 @@ class Meta(models.Model):
     key = models.CharField(max_length=120)
     content = models.TextField()
     post = models.OneToOneField(
-        Post,
-        on_delete=models.CASCADE
-    )
-
-
-class Category(models.Model):
-    title = models.CharField(max_length=120)
-    metaTitle = models.CharField(max_length=120)
-    slug = models.SlugField()
-    post = models.ForeignKey(
         Post,
         on_delete=models.CASCADE
     )
